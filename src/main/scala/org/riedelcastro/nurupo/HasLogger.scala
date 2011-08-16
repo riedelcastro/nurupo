@@ -28,4 +28,11 @@ trait HasLogger {
     override def toString: String = func
   }
 
+  def debugLazy(msg: String) {logger.debug(lazyString(msg))}
+  def infoLazy(msg: String) {logger.info(lazyString(msg))}
+  def errorLazy(msg: String) {logger.error(lazyString(msg))}
+  def warnLazy(msg: String) {logger.warn(lazyString(msg))}
+  def traceLazy(msg: String) {logger.trace(lazyString(msg))}
+
+
 }
