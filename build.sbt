@@ -9,6 +9,8 @@ version := "0.1-SNAPSHOT"
 
 scalaVersion := "2.9.1"
 
+scalacOptions ++= Seq("-unchecked","-deprecation")
+
 // Add multiple dependencies
 libraryDependencies ++= Seq(
      "junit" % "junit" % "4.8" % "test",

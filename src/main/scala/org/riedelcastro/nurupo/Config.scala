@@ -15,7 +15,7 @@ class Config(val properties: Properties) {
 
   def get[T](key: String)(implicit m: Manifest[T]): T = {
     val value = properties.getProperty(key)
-    if (value == null) error("No value associated with key " + key)
+    if (value == null) sys.error("No value associated with key " + key)
     createBySimpleErasureName(m.erasure.getSimpleName, value)
   }
 
@@ -38,7 +38,7 @@ class Config(val properties: Properties) {
         val split = value.split(",").map(_.trim).map(createBySimpleErasureName(prefix, _))
 
       }
-      case x => error("Can't convert type " + x)
+      case x => sys.error("Can't convert type " + x)
     }
     result.asInstanceOf[T]
   }
