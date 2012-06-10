@@ -24,3 +24,4 @@ libraryDependencies ++= Seq(
      "junit" % "junit" % "4.8" % "test",
      "log4j" % "log4j" % "1.2.16"
 )
+              

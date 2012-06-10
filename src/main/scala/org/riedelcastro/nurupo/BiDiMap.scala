@@ -1,7 +1,6 @@
 package org.riedelcastro.nurupo
 
 import collection.mutable.HashMap
-import collection.MapProxy
 
 /**
  * Simple bidirectional map.
