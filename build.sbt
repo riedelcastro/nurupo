@@ -7,7 +7,9 @@ organization := "org.riedelcastro.nurupo"
 // All other initialization methods are implemented in terms of these.
 version := "0.1-SNAPSHOT"
 
-scalaVersion := "2.9.1"
+crossScalaVersions := Seq("2.9.1", "2.9.2")
+
+scalaVersion := "2.9.2"
 
 scalacOptions ++= Seq("-unchecked","-deprecation")
 
