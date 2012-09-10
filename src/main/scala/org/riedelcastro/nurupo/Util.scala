@@ -15,6 +15,15 @@ import io.Source
  * @author sriedel
  */
 object Util extends HasLogger {
+
+  def untilException[T](call: => T,stop:Throwable => Boolean) = Iterator.continually({
+    try {
+      call
+    } catch {
+      case t:Throwable if (stop(t)) => null.asInstanceOf[T]
+    }
+  }).takeWhile(_ != null)
+
   /**Recursively descend directory, returning a list of files. */
   def files(directory: File): Seq[File] = {
     if (!directory.exists) throw new Error("File " + directory + " does not exist")
