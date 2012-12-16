@@ -26,11 +26,12 @@ class ProgressMonitor {
       println("Starting %s with %d rounds and %d steps for each".format(name, roundsMax, stepsMax))
     }
 
-    def printProgress() {
+    def printProgress(status: => String = "") {
       val fineInterval = math.max(stepsMax / 100, 1)
-      if (stepsCurrent % fineInterval == 0 || stepsCurrent == stepsMax)
+      if (stepsCurrent % fineInterval == 0 || stepsCurrent == stepsMax) {
         print("\r" + progressString((stepsCurrent) / stepsMax.toDouble, 40) +
-          "%3d/%-3d".format(roundsCurrent + 1, roundsMax))
+          " %3d/%-3d %s".format(roundsCurrent + 1, roundsMax, status))
+      }
     }
 
   }
@@ -46,7 +47,11 @@ class ProgressMonitor {
     process.printStart()
   }
 
-  def progress(id: Any = 'default, howmuch: Int = 1) {
+  def setMaxSteps(id:Any = 'default, stepsMax:Int) {
+    processes(id).stepsMax = stepsMax
+  }
+
+  def progress(id: Any = 'default, howmuch: Int = 1, status: => String = "") {
     val process = processes(id)
     process.stepsCurrent += howmuch
     if (process.stepsCurrent > process.stepsMax) {
@@ -54,7 +59,7 @@ class ProgressMonitor {
       process.roundsCurrent += 1
       process.stepsCurrent = 1
     }
-    process.printProgress()
+    process.printProgress(status)
     if (process.roundsCurrent > process.roundsMax) {
       processes.remove(process.id)
     }
