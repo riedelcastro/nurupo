@@ -36,7 +36,7 @@ class ProgressMonitor {
 
   }
 
-  val processes: collection.concurrent.Map[Any, Process] = new ConcurrentHashMap[Any, Process]
+  val processes: mutable.ConcurrentMap[Any, Process] = new ConcurrentHashMap[Any, Process]
 
   def start(id: Any = 'default, name: String = "default", stepsMax: Int, roundsMax: Int = 1) {
     val process = new Process(id, name)

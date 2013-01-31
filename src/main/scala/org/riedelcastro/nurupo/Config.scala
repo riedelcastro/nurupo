@@ -16,12 +16,12 @@ class Config(val properties: Properties) {
   def get[T](key: String)(implicit m: Manifest[T]): T = {
     val value = properties.getProperty(key)
     if (value == null) sys.error("No value associated with key " + key)
-    createBySimpleErasureName(m.runtimeClass.getSimpleName, value)
+    createBySimpleErasureName(m.erasure.getSimpleName, value)
   }
 
   def get[T](key: String, default: T)(implicit m: Manifest[T]): T = {
     val value = properties.getProperty(key)
-    if (value == null) default else createBySimpleErasureName(m.runtimeClass.getSimpleName, value)
+    if (value == null) default else createBySimpleErasureName(m.erasure.getSimpleName, value)
   }
 
   private def createBySimpleErasureName[T](name: String, untrimmed: String): T = {
